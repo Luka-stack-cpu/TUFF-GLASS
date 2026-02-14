@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>TUFF GLASSES — стильные очки за 1000 сом</title>
+    <link rel="icon" href="img/logo.png" type="icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_ключ&lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">TUFF<span>GLASS</span></div>
+            <nav class="nav" id="navMenu">
+                <a href="index.html">Главная</a>
+                <a href="#catalog">Каталог</a>
+                <a href="#about">О нас</a>
+                <a href="#delivery">Доставка</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+            <div class="header-actions">
+                <div class="cart-icon" id="cartIcon">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+                <button class="btn btn-primary" onclick="document.querySelector('#catalog').scrollIntoView({behavior: 'smooth'})">Купить сейчас</button>
+                <div class="burger" id="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="timer">
+                    ⏳ Скидка заканчивается через: <span id="timer">02:15:00</span>
+                </div>
+                <h1>Стильные очки всего за 1000 сом</h1>
+                <p>Защита UV400. Лёгкие. Прочные. Доступные каждому.</p>
+                <div class="hero-btns">
+                    <button class="btn btn-primary" onclick="document.querySelector('#catalog').scrollIntoView({behavior: 'smooth'})">🔥 Смотреть модели</button>
+                    <button class="btn btn-outline" onclick="document.querySelector('#catalog').scrollIntoView({behavior: 'smooth'})">🛒 Купить сейчас</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://i.postimg.cc/VkNMpg9F/IMG-20260213-211036-283.jpg" alt="Стильные очки">
+            </div>
+        </div>
+    </section>
+    <section id="catalog" class="section">
+        <div class="container">
+            <h2 class="section-title">🔥 Хиты продаж</h2>
+            <div class="catalog-grid" id="catalogGrid"></div>
+        </div>
+    </section>
+    <section id="about" class="section">
+        <div class="container features">
+            <h2 style="font-size: 32px; font-weight: 700;">Почему выбирают нас</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-title">UV400 защита</div>
+                    <div class="feature-desc">100% блокировка ультрафиолета</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🕊️</div>
+                    <div class="feature-title">Лёгкий вес</div>
+                    <div class="feature-desc">Всего 25 грамм</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👫</div>
+                    <div class="feature-title">Унисекс</div>
+                    <div class="feature-desc">Подходят всем</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✨</div>
+                    <div class="feature-title">Современный дизайн</div>
+                    <div class="feature-desc">Тренды 2026</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-title">Доступная цена</div>
+                    <div class="feature-desc">Без наценок</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🚚</div>
+                    <div class="feature-title">Быстрая доставка</div>
+                    <div class="feature-desc">По Бишкеку за 2 часа</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="price-compare">
+                <div>
+                    <h2>Почему у нас всего 1000 сом?</h2>
+                    <p>Мы работаем напрямую без посредников. Нет переплаты за бренд. Минимальные расходы на рекламу. Прямые поставки.</p>
+                </div>
+                <div class="compare-numbers">
+                    <span class="compare-old">1500–2500 сом</span>
+                    <span class="compare-new">1000 сом</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Отзывы наших покупателей</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-text">«Заказывала уже вторые. Очень стильные, невесомые, реально защищают от солнца. Доставка быстрая.»</div>
+                    <div class="review-author">— Айжан</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-text">«За такую цену — просто подарок. В магазинах такие же по 2000 сом. Теперь только тут.»</div>
+                    <div class="review-author">— Бектур</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-text">«Удобно, что можно самовывозом забрать прямо у парка Байтик. Вежливый персонал.»</div>
+                    <div class="review-author">— Карина</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer" id="contacts">
+        <div class="container">
+            <div>
+                <div class="footer-logo">TUFF<span style="color: var(--accent);">GLASS</span></div>
+                <p style="color: #ccc; margin-bottom: 20px;">Стильные очки по честной цене. Бишкек.</p>
+                <div class="footer-social">
+                    <a href="#">📷</a>
+                    <a href="#">📱</a>
+                    <a href="#">💬</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4 style="margin-bottom: 20px;">Информация</h4>
+                <a href="#">О нас</a>
+                <a href="#">Доставка</a>
+                <a href="#">Политика конфиденциальности</a>
+            </div>
+            <div class="footer-links">
+                <h4 style="margin-bottom: 20px;">Каталог</h4>
+                <a href="#">Мужские</a>
+                <a href="#">Женские</a>
+                <a href="#">Унисекс</a>
+            </div>
+            <div class="footer-links">
+                <h4 style="margin-bottom: 20px;">Контакты</h4>
+                <a href="tel:+996700123456">+996 700 12 34 56</a>
+                <a href="#">Instagram</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 40px; text-align: center; color: #888; border-top: 1px solid #222; padding-top: 30px;">
+            © 2026 TUFFGLASS. Все права защищены.
+        </div>
+    </footer>
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeProductModal">&times;</span>
+            <div id="productDetailContent"></div>
+        </div>
+    </div>
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeCartModal">&times;</span>
+            <h2 style="font-size: 28px; margin-bottom: 20px;">Корзина</h2>
+            <div id="cartItemsContainer"></div>
+            <div id="cartTotal" class="cart-total"></div>
+            <button class="btn btn-primary" id="checkoutBtn" style="width: 100%; margin-top: 20px;">Оформить заказ</button>
+        </div>
+    </div>
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeCheckoutModal">&times;</span>
+            <h2 style="font-size: 28px; margin-bottom: 20px;">Оформление заказа</h2>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="deliveryType" value="pickup" checked> Самовывоз (0 сом)
+                </label>
+                <label>
+                    <input type="radio" name="deliveryType" value="delivery"> Доставка (150 сом)
+                </label>
+            </div>
+            <div id="pickupBlock">
+                <p style="margin-bottom: 16px;"><strong>📍 Парк Байтик, Советская магистраль, Бишкек</strong></p>
+                <div id="mapContainer" class="pickup-map"></div>
+                <p style="margin: 16px 0;">📞 Контактный номер: +996 700 12 34 56</p>
+                <img src="https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?w=600&auto=format&fit=crop" alt="Точка выдачи" style="border-radius: 16px; margin-bottom: 16px;">
+                <button class="btn btn-primary" id="confirmPickupBtn" style="width: 100%;">Подтвердить заказ (самовывоз)</button>
+            </div>
+            <div id="deliveryBlock" style="display: none;">
+                <form id="deliveryForm" class="delivery-form">
+                    <input type="text" placeholder="Имя" required>
+                    <input type="tel" placeholder="Телефон" required>
+                    <input type="text" placeholder="Адрес" required>
+                    <textarea placeholder="Комментарий" rows="3"></textarea>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Подтвердить заказ (доставка 150 сом)</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+// ========== ДАННЫЕ ТОВАРОВ (НОВЫЕ ФОТО С ImgBB) ==========
+const products = [
+    {
+        id: 1,
+        name: 'C24',
+        desc: 'Квадратные, поляризация, UV400',
+        price: 900,
+        oldPrice: 2500,
+        image: 'https://i.ibb.co/wFnWt6Pg/C24-e67a56ff-ba85-47da-bdff-a45fb3294290.jpg',
+        badge: 'Новинка',
+        images: [],
+        specs: 'PC оправа, TAC линзы, 100+ цветов в ассортименте.'
+    },
+    {
+        id: 2,
+        name: 'C10',
+        desc: 'Классический дизайн, унисекс',
+        price: 900,
+        oldPrice: 2500,
+        image: 'https://i.ibb.co/J4HrkqT/C10-1fb676c7-abff-42c8-aa72-588e9d378b1e.jpg',
+        badge: '',
+        images: [],
+        specs: 'UV400, лёгкая оправа, подходят для повседневной носки.'
+    },
+    {
+        id: 3,
+        name: 'C4',
+        desc: 'Спортивный стиль, зеркальные линзы',
+        price: 900,
+        oldPrice: 2500,
+        image: 'https://i.ibb.co/mCyw4sxn/C4-79475673-8ac1-42ff-8bb8-e36bd49dbc05.jpg',
+        badge: 'Хит',
+        images: [],
+        specs: 'Поляризация, защита от бликов, ударопрочные.'
+    },
+    {
+        id: 4,
+        name: 'C12',
+        desc: 'Минимализм, тонкая оправа',
+        price: 900,
+        oldPrice: 2500,
+        image: 'https://i.ibb.co/fYvV3vdp/C12-d503ae9e-290b-4ef3-9c6c-d00f2a907090.jpg',
+        badge: '',
+        images: [],
+        specs: 'UV400, суперлёгкие, невесомые на лице.'
+    },
+    {
+        id: 5,
+        name: 'C3',
+        desc: 'Ретро-стиль, круглые',
+        price: 900,
+        oldPrice: 2500,
+        image: 'https://i.ibb.co/HfdMxNnk/C3-5df86c56-4c43-4c1b-81e3-6776af4580d0.jpg',
+        badge: '',
+        images: [],
+        specs: 'Ацетатная оправа, UV400, стиль унисекс.'
+    },
+    {
+        id: 6,
+        name: 'C2',
+        desc: 'Квадратные, матовые',
+        price: 900,
+        oldPrice: 2500,
+        image: 'https://i.ibb.co/WNW63KLp/C2-b6ab5842-e99c-4eb9-af4f-76375bc8cbc0.jpg',
+        badge: '',
+        images: [],
+        specs: 'Поляризация, нескользящие дужки.'
+    },
+    {
+        id: 7,
+        name: 'C1',
+        desc: 'Универсальная классика (перед/зад)',
+        price: 900,
+        oldPrice: 2500,
+        image: 'https://i.ibb.co/gMKwKB9p/C1-5d8d0a10-687f-407a-a05f-b89498289d84.jpg',
+        badge: 'Хит',
+        images: [
+            'https://i.ibb.co/zWnxnkjv/19-5e200cd7-d8c8-4620-930f-265b2a461b4d.jpg' // задний вид
+        ],
+        specs: 'Классическая форма, два ракурса в одной модели.'
+    },
+    {
+        id: 8,
+        name: '19',
+        desc: 'Спортивные, два вида',
+        price: 900,
+        oldPrice: 2500,
+        image: 'https://i.ibb.co/1GfKZsSw/2.jpg',
+        badge: 'Новинка',
+        images: [
+            'https://i.ibb.co/9mVNyTxf/20.jpg' // второй вид
+        ],
+        specs: 'Два варианта дизайна: перед/зад. Поляризация, UV400.'
+    }
+];
+
+        let cart = JSON.parse(localStorage.getItem('styleglassCart')) || [];
+
+        function saveCart() {
+            localStorage.setItem('styleglassCart', JSON.stringify(cart));
+            updateCartCount();
+            renderCartItems();
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+            document.getElementById('cartCount').innerText = count;
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            saveCart();
+            alert('✅ Товар добавлен в корзину!');
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cartItemsContainer');
+            if (!container) return;
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align:center; padding:30px;">Корзина пуста</p>';
+                document.getElementById('cartTotal').innerHTML = '';
+                return;
+            }
+            let html = '';
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                html += `
+                    <div class="cart-item">
+                        <img src="${item.image}" class="cart-item-img" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div style="font-size:14px; color:gray;">${item.desc}</div>
+                            <div class="cart-item-price">${item.price} сом x ${item.quantity}</div>
+                        </div>
+                        <div class="cart-item-remove" onclick="removeFromCart(${item.id})">Удалить</div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            document.getElementById('cartTotal').innerHTML = `Итого: ${total} сом`;
+        }
+
+        function renderCatalog() {
+            const grid = document.getElementById('catalogGrid');
+            grid.innerHTML = products.map(p => `
+                <div class="product-card" onclick="openProductModal(${p.id})">
+                    ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+                    <img src="${p.image}" class="product-img" alt="${p.name}">
+                    <h3 class="product-title">${p.name}</h3>
+                    <p class="product-desc">${p.desc}</p>
+                    <div class="product-price">
+                        ${p.price} сом
+                        <span class="old-price">${p.oldPrice} сом</span>
+                    </div>
+                    <button class="btn-add" onclick="event.stopPropagation(); addToCart(${p.id})">🛒 Хочу купить</button>
+                </div>
+            `).join('');
+        }
+        function openProductModal(id) {
+    const product = products.find(p => p.id === id);
+    const modal = document.getElementById('productModal');
+    const detail = document.getElementById('productDetailContent');
+    
+    let imagesHtml = `<img src="${product.image}" id="mainProductImage" style="width:100%; border-radius:20px; margin-bottom:10px;">`;
+    
+    // Если есть дополнительные фото, добавляем превью
+    if (product.images && product.images.length > 0) {
+        imagesHtml += '<div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">';
+        // Добавляем главное фото как первое превью
+        imagesHtml += `<img src="${product.image}" onclick="document.getElementById('mainProductImage').src='${product.image}'" style="width:70px; height:70px; object-fit:cover; border-radius:10px; cursor:pointer; border:2px solid transparent;" onmouseover="this.style.borderColor='#f97316'" onmouseout="this.style.borderColor='transparent'">`;
+        // Добавляем остальные фото
+        product.images.forEach(img => {
+            imagesHtml += `<img src="${img}" onclick="document.getElementById('mainProductImage').src='${img}'" style="width:70px; height:70px; object-fit:cover; border-radius:10px; cursor:pointer; border:2px solid transparent;" onmouseover="this.style.borderColor='#f97316'" onmouseout="this.style.borderColor='transparent'">`;
+        });
+        imagesHtml += '</div>';
+    }
+    
+    detail.innerHTML = `
+        <div style="display:grid; gap:20px;">
+            ${imagesHtml}
+            <h2 style="font-size:28px;">${product.name}</h2>
+            <p>${product.desc}</p>
+            <p><strong>Характеристики:</strong> ${product.specs}</p>
+            <div style="display:flex; gap:10px;">
+                <span style="font-size:32px; font-weight:800;">${product.price} сом</span>
+                <span style="font-size:20px; color:gray; text-decoration:line-through;">${product.oldPrice} сом</span>
+            </div>
+            <button class="btn-add" onclick="addToCart(${product.id}); document.getElementById('productModal').classList.remove('active');">🛒 Добавить в корзину</button>
+        </div>
+    `;
+    modal.classList.add('active');
+}
+        document.getElementById('burger').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        function startTimer(hours) {
+            let totalSeconds = hours * 3600;
+            const timerEl = document.getElementById('timer');
+            function tick() {
+                if (totalSeconds <= 0) {
+                    timerEl.innerText = '00:00:00';
+                    return;
+                }
+                totalSeconds--;
+                const h = Math.floor(totalSeconds / 3600);
+                const m = Math.floor((totalSeconds % 3600) / 60);
+                const s = totalSeconds % 60;
+                timerEl.innerText = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            }
+            tick();
+            setInterval(tick, 1000);
+        }
+        startTimer(2); 
+
+        document.getElementById('cartIcon').addEventListener('click', function() {
+            renderCartItems();
+            document.getElementById('cartModal').classList.add('active');
+        });
+
+        document.getElementById('closeCartModal').addEventListener('click', function() {
+            document.getElementById('cartModal').classList.remove('active');
+        });
+
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            document.getElementById('cartModal').classList.remove('active');
+            document.getElementById('checkoutModal').classList.add('active');
+            initMap(); 
+        });
+
+        const radios = document.querySelectorAll('input[name="deliveryType"]');
+        radios.forEach(r => {
+            r.addEventListener('change', function() {
+                if (this.value === 'pickup') {
+                    document.getElementById('pickupBlock').style.display = 'block';
+                    document.getElementById('deliveryBlock').style.display = 'none';
+                } else {
+                    document.getElementById('pickupBlock').style.display = 'none';
+                    document.getElementById('deliveryBlock').style.display = 'block';
+                }
+            });
+        });
+
+        document.getElementById('confirmPickupBtn').addEventListener('click', function() {
+            alert('Заказ оформлен (самовывоз). Ждём вас по адресу: Парк Байтик!');
+            cart = [];
+            saveCart();
+            document.getElementById('checkoutModal').classList.remove('active');
+        });
+
+        document.getElementById('deliveryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Заказ оформлен! Доставка 150 сом. Скоро с вами свяжутся.');
+            cart = [];
+            saveCart();
+            document.getElementById('checkoutModal').classList.remove('active');
+        });
+
+        document.getElementById('closeProductModal').addEventListener('click', function() {
+            document.getElementById('productModal').classList.remove('active');
+        });
+        document.getElementById('closeCheckoutModal').addEventListener('click', function() {
+            document.getElementById('checkoutModal').classList.remove('active');
+        });
+
+        function initMap() {
+            if (typeof ymaps !== 'undefined') {
+                ymaps.ready(function() {
+                    var map = new ymaps.Map('mapContainer', {
+                        center: [42.8746, 74.5698], 
+                        zoom: 16
+                    });
+                    var placemark = new ymaps.Placemark([42.8746, 74.5698], {
+                        hintContent: 'Парк Байтик',
+                        balloonContent: 'Наша точка самовывоза'
+                    });
+                    map.geoObjects.add(placemark);
+                });
+            } else {
+                document.getElementById('mapContainer').innerHTML = '<div style="background:#ddd; height:100%; display:flex; align-items:center; justify-content:center;">Карта загружается...</div>';
+            }
+        }
+
+        renderCatalog();
+        updateCartCount();
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
