@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_ключ&lang=ru_RU" type="text/javascript"></script>
+    <meta name="google-site-verification" content="34wOhlYxT77lx4bWL8QBewnBjPPC1MIXYSb_aEowmHY" />
 </head>
 <body>
     <header class="header">
@@ -153,7 +154,7 @@
             </div>
             <div class="footer-links">
                 <h4 style="margin-bottom: 20px;">Контакты</h4>
-                <a href="tel:+996700123456">+996 700 12 34 56</a>
+                <a href="tel:+996700123456">+996 558 14 06 10</a>
                 <a href="#">Instagram</a>
                 <a href="#">WhatsApp</a>
             </div>
@@ -177,39 +178,139 @@
             <button class="btn btn-primary" id="checkoutBtn" style="width: 100%; margin-top: 20px;">Оформить заказ</button>
         </div>
     </div>
-    <div id="checkoutModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeCheckoutModal">&times;</span>
-            <h2 style="font-size: 28px; margin-bottom: 20px;">Оформление заказа</h2>
-            <div class="radio-group">
-                <label>
-                    <input type="radio" name="deliveryType" value="pickup" checked> Самовывоз (0 сом)
-                </label>
-                <label>
-                    <input type="radio" name="deliveryType" value="delivery"> Доставка (150 сом)
-                </label>
-            </div>
-            <div id="pickupBlock">
-                <p style="margin-bottom: 16px;"><strong>📍 Парк Байтик, Советская магистраль, Бишкек</strong></p>
-                <div id="mapContainer" class="pickup-map"></div>
-                <p style="margin: 16px 0;">📞 Контактный номер: +996 700 12 34 56</p>
-                <img src="https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?w=600&auto=format&fit=crop" alt="Точка выдачи" style="border-radius: 16px; margin-bottom: 16px;">
-                <button class="btn btn-primary" id="confirmPickupBtn" style="width: 100%;">Подтвердить заказ (самовывоз)</button>
-            </div>
-            <div id="deliveryBlock" style="display: none;">
-                <form id="deliveryForm" class="delivery-form">
-                    <input type="text" placeholder="Имя" required>
-                    <input type="tel" placeholder="Телефон" required>
-                    <input type="text" placeholder="Адрес" required>
-                    <textarea placeholder="Комментарий" rows="3"></textarea>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Подтвердить заказ (доставка 150 сом)</button>
-                </form>
-            </div>
+<div id="checkoutModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeCheckoutModal">&times;</span>
+        <h2 style="font-size: 28px; margin-bottom: 20px;">Оформление заказа</h2>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="deliveryType" value="pickup" checked> Самовывоз (0 сом)
+            </label>
+            <label>
+                <input type="radio" name="deliveryType" value="delivery"> Доставка (150 сом)
+            </label>
+        </div>
+        <div id="pickupBlock">
+            <p style="margin-bottom: 16px;"><strong>📍 Парк Байтик, Советская магистраль, Бишкек</strong></p>
+            <div id="mapContainer" class="pickup-map" style="width:100%; height:250px; background:#eaeef2; border-radius:16px;"></div>
+            <p style="margin: 16px 0;">📞 Контактный номер: +996 550 31 23 45</p>
+            <button class="btn btn-primary" id="confirmPickupBtn" style="width: 100%;">Подтвердить заказ (самовывоз)</button>
+        </div>
+        <div id="deliveryBlock" style="display: none;">
+            <form id="deliveryForm" class="delivery-form">
+                <input type="text" placeholder="Имя" required>
+                <input type="tel" placeholder="Телефон" required>
+                <input type="text" placeholder="Адрес" required>
+                <textarea placeholder="Комментарий" rows="3"></textarea>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Подтвердить заказ (доставка 150 сом)</button>
+            </form>
         </div>
     </div>
-
+</div>
+<div id="contactModal" class="modal">
+    <div class="modal-content" style="max-width: 450px; text-align: center;">
+        <span class="close-modal" id="closeContactModal">&times;</span>
+        <h2 style="font-size: 28px; margin-bottom: 10px;">✅ Заказ принят!</h2>
+        <p style="margin-bottom: 20px; color: #666;">Выберите способ связи, чтобы подтвердить заказ</p>
+        
+        <div style="display: flex; flex-direction: column; gap: 15px; margin: 30px 0;">
+            <a href="tel:0558140610" style="display: flex; align-items: center; justify-content: center; gap: 12px; background: #0a0a0a; color: white; padding: 16px; border-radius: 60px; text-decoration: none; font-weight: 600; font-size: 18px; transition: 0.2s;">
+                <span style="font-size: 24px;">📞</span> Позвонить: 0558 140 610
+            </a>
+                        <button id="whatsappOrderBtn" style="display: flex; align-items: center; justify-content: center; gap: 12px; background: #25D366; color: white; padding: 16px; border-radius: 60px; border: none; font-weight: 600; font-size: 18px; cursor: pointer; transition: 0.2s;">
+                <span style="font-size: 24px;">💬</span> Отправить в WhatsApp
+            </button>
+        </div>
+        
+        <p style="font-size: 14px; color: #999;">Мы свяжемся с вами в ближайшее время</p>
+    </div>
+</div>
     <script>
-// ========== ДАННЫЕ ТОВАРОВ (НОВЫЕ ФОТО С ImgBB) ==========
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        function getWhatsAppMessage() {
+            let message = "🕶️ *Новый заказ!*\n\n";
+            message += "*Товары:*\n";
+            
+            cart.forEach(item => {
+                message += `• ${item.name} — ${item.quantity} шт. = ${item.price * item.quantity} сом\n`;
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `\n*Итого:* ${total} сом\n`;
+            
+            const deliveryType = document.querySelector('input[name="deliveryType"]:checked');
+            if (deliveryType && deliveryType.value === 'pickup') {
+                message += "\n*Самовывоз:* Парк Байтик";
+            } else {
+                const form = document.getElementById('deliveryForm');
+                if (form) {
+                    const name = form.querySelector('input[placeholder="Имя"]')?.value || '';
+                    const phone = form.querySelector('input[placeholder="Телефон"]')?.value || '';
+                    const address = form.querySelector('input[placeholder="Адрес"]')?.value || '';
+                    const comment = form.querySelector('textarea')?.value || '';
+                    
+                    message += `\n*Доставка:* 150 сом`;
+                    message += `\n*Имя:* ${name || 'не указано'}`;
+                    message += `\n*Телефон:* ${phone || 'не указан'}`;
+                    message += `\n*Адрес:* ${address || 'не указан'}`;
+                    if (comment) message += `\n*Комментарий:* ${comment}`;
+                }
+            }
+            
+            return encodeURIComponent(message);
+        }
+
+        const whatsappBtn = document.getElementById('whatsappOrderBtn');
+        if (whatsappBtn) {
+            whatsappBtn.addEventListener('click', function() {
+                const phone = '996558140610';
+                const message = getWhatsAppMessage();
+                window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+                
+                cart = [];
+                saveCart();
+                
+                document.getElementById('contactModal')?.classList.remove('active');
+                document.getElementById('checkoutModal')?.classList.remove('active');
+                document.getElementById('cartModal')?.classList.remove('active');
+            });
+        }
+
+        const pickupBtn = document.getElementById('confirmPickupBtn');
+        if (pickupBtn) {
+            pickupBtn.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Корзина пуста');
+                    return;
+                }
+                document.getElementById('checkoutModal')?.classList.remove('active');
+                document.getElementById('contactModal')?.classList.add('active');
+            });
+        }
+
+        const deliveryForm = document.getElementById('deliveryForm');
+        if (deliveryForm) {
+            deliveryForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (cart.length === 0) {
+                    alert('Корзина пуста');
+                    return;
+                }
+                document.getElementById('checkoutModal')?.classList.remove('active');
+                document.getElementById('contactModal')?.classList.add('active');
+            });
+        }
+
+        const closeContactBtn = document.getElementById('closeContactModal');
+        if (closeContactBtn) {
+            closeContactBtn.addEventListener('click', function() {
+                document.getElementById('contactModal')?.classList.remove('active');
+            });
+        }
+    });
+</script>
+    <script>
 const products = [
     {
         id: 1,
@@ -462,21 +563,6 @@ const products = [
                     document.getElementById('deliveryBlock').style.display = 'block';
                 }
             });
-        });
-
-        document.getElementById('confirmPickupBtn').addEventListener('click', function() {
-            alert('Заказ оформлен (самовывоз). Ждём вас по адресу: Парк Байтик!');
-            cart = [];
-            saveCart();
-            document.getElementById('checkoutModal').classList.remove('active');
-        });
-
-        document.getElementById('deliveryForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Заказ оформлен! Доставка 150 сом. Скоро с вами свяжутся.');
-            cart = [];
-            saveCart();
-            document.getElementById('checkoutModal').classList.remove('active');
         });
 
         document.getElementById('closeProductModal').addEventListener('click', function() {
