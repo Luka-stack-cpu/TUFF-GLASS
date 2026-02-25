@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
     <title>TUFFE GLASSES — стильные очки за 1000 сом</title>
-    <link rel="icon" href="logo.png" type="icon">
+    <link rel="icon" href="img/logo.png" type="icon">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_ключ&lang=ru_RU" type="text/javascript"></script>
@@ -22,17 +22,20 @@
                 <a href="#contacts">Контакты</a>
             </nav>
             <div class="header-actions">
-                <div class="cart-icon" id="cartIcon">
-                    🛒
-                    <span class="cart-count" id="cartCount">0</span>
-                </div>
-                <button class="btn btn-primary" onclick="document.querySelector('#catalog').scrollIntoView({behavior: 'smooth'})">Купить сейчас</button>
-                <div class="burger" id="burger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
+    <!-- Кнопка темы -->
+    <button class="theme-toggle" id="themeToggle" title="Сменить тему" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--black);">🌙</button>
+    
+    <div class="cart-icon" id="cartIcon">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+    <button class="btn btn-primary" onclick="document.querySelector('#catalog').scrollIntoView({behavior: 'smooth'})">Купить сейчас</button>
+    <div class="burger" id="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
         </div>
     </header>
     <section class="hero">
@@ -104,7 +107,7 @@
                     <p>Мы работаем напрямую без посредников. Нет переплаты за бренд. Минимальные расходы на рекламу. Прямые поставки.</p>
                 </div>
                 <div class="compare-numbers">
-                    <span class="compare-old">1500–2500 сом</span>
+                    <span class="compare-old">1500 сом</span>
                     <span class="compare-new">1000 сом</span>
                 </div>
             </div>
@@ -124,7 +127,7 @@
                 </div>
                 <div class="review-card">
                     <div class="review-text">«Удобно, что можно самовывозом забрать прямо у парка Байтик. Вежливый персонал.»</div>
-                    <div class="review-author">— Карина</div>
+                    <div class="review-author">— Жанеля</div>
                 </div>
             </div>
         </div>
@@ -135,9 +138,9 @@
                 <div class="footer-logo">TUFFE<span style="color: var(--accent);">GLASS</span></div>
                 <p style="color: #ccc; margin-bottom: 20px;">Стильные очки по честной цене. Бишкек.</p>
                 <div class="footer-social">
-                    <a href="#">📷</a>
-                    <a href="#">📱</a>
-                    <a href="#">💬</a>
+                    <a href="tel:996558140610">📷</a>
+                    <a href="tel:996558140610">📱</a>
+                    <a href="tel:996558140610">💬</a>
                 </div>
             </div>
             <div class="footer-links">
@@ -148,15 +151,15 @@
             </div>
             <div class="footer-links">
                 <h4 style="margin-bottom: 20px;">Каталог</h4>
-                <a href="#">Мужские</a>
-                <a href="#">Женские</a>
-                <a href="#">Унисекс</a>
+                <a href="#catalog">Мужские</a>
+                <a href="#catalog">Женские</a>
+                <a href="#catalog">Унисекс</a>
             </div>
             <div class="footer-links">
                 <h4 style="margin-bottom: 20px;">Контакты</h4>
-                <a href="tel:+996700123456">+996 558 14 06 10</a>
-                <a href="#">Instagram</a>
-                <a href="#">WhatsApp</a>
+                <a href="tel:+996700123456">+996 700 12 34 56</a>
+                <a href="https://www.instagram.com/tuffe.kg?igsh=aHEyOGExZ3I4ajYy">Instagram</a>
+                <a href="tel:+996700123456">WhatsApp</a>
             </div>
         </div>
         <div class="container" style="margin-top: 40px; text-align: center; color: #888; border-top: 1px solid #222; padding-top: 30px;">
@@ -193,7 +196,7 @@
         <div id="pickupBlock">
             <p style="margin-bottom: 16px;"><strong>📍 Парк Байтик, Советская магистраль, Бишкек</strong></p>
             <div id="mapContainer" class="pickup-map" style="width:100%; height:250px; background:#eaeef2; border-radius:16px;"></div>
-            <p style="margin: 16px 0;">📞 Контактный номер: +996 550 31 23 45</p>
+            <p style="margin: 16px 0;">📞 Контактный номер: +996 700 12 34 56</p>
             <button class="btn btn-primary" id="confirmPickupBtn" style="width: 100%;">Подтвердить заказ (самовывоз)</button>
         </div>
         <div id="deliveryBlock" style="display: none;">
@@ -316,8 +319,7 @@ const products = [
         id: 1,
         name: 'C24',
         desc: 'Квадратные, поляризация, UV400',
-        price: 900,
-        oldPrice: 2500,
+        price: 1000,
         image: 'https://i.ibb.co/wFnWt6Pg/C24-e67a56ff-ba85-47da-bdff-a45fb3294290.jpg',
         badge: 'Новинка',
         images: [],
@@ -327,8 +329,7 @@ const products = [
         id: 2,
         name: 'C10',
         desc: 'Классический дизайн, унисекс',
-        price: 900,
-        oldPrice: 2500,
+        price: 1000,
         image: 'https://i.ibb.co/J4HrkqT/C10-1fb676c7-abff-42c8-aa72-588e9d378b1e.jpg',
         badge: '',
         images: [],
@@ -338,8 +339,7 @@ const products = [
         id: 3,
         name: 'C4',
         desc: 'Спортивный стиль, зеркальные линзы',
-        price: 900,
-        oldPrice: 2500,
+        price: 1000,
         image: 'https://i.ibb.co/mCyw4sxn/C4-79475673-8ac1-42ff-8bb8-e36bd49dbc05.jpg',
         badge: 'Хит',
         images: [],
@@ -349,8 +349,7 @@ const products = [
         id: 4,
         name: 'C12',
         desc: 'Минимализм, тонкая оправа',
-        price: 900,
-        oldPrice: 2500,
+        price: 1000,
         image: 'https://i.ibb.co/fYvV3vdp/C12-d503ae9e-290b-4ef3-9c6c-d00f2a907090.jpg',
         badge: '',
         images: [],
@@ -360,8 +359,7 @@ const products = [
         id: 5,
         name: 'C3',
         desc: 'Ретро-стиль, круглые',
-        price: 900,
-        oldPrice: 2500,
+        price: 1000,
         image: 'https://i.ibb.co/HfdMxNnk/C3-5df86c56-4c43-4c1b-81e3-6776af4580d0.jpg',
         badge: '',
         images: [],
@@ -371,8 +369,7 @@ const products = [
         id: 6,
         name: 'C2',
         desc: 'Квадратные, матовые',
-        price: 900,
-        oldPrice: 2500,
+        price: 1000,
         image: 'https://i.ibb.co/WNW63KLp/C2-b6ab5842-e99c-4eb9-af4f-76375bc8cbc0.jpg',
         badge: '',
         images: [],
@@ -382,8 +379,7 @@ const products = [
         id: 7,
         name: 'C1',
         desc: 'Универсальная классика (перед/зад)',
-        price: 900,
-        oldPrice: 2500,
+        price: 1000,
         image: 'https://i.ibb.co/gMKwKB9p/C1-5d8d0a10-687f-407a-a05f-b89498289d84.jpg',
         badge: 'Хит',
         images: [
@@ -395,8 +391,7 @@ const products = [
         id: 8,
         name: '19',
         desc: 'Спортивные, два вида',
-        price: 900,
-        oldPrice: 2500,
+        price: 1000,
         image: 'https://i.ibb.co/1GfKZsSw/2.jpg',
         badge: 'Новинка',
         images: [
@@ -420,16 +415,17 @@ const products = [
         }
 
         function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            const existing = cart.find(item => item.id === productId);
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ ...product, quantity: 1 });
-            }
-            saveCart();
-            alert('✅ Товар добавлен в корзину!');
+        const product = products.find(p => p.id === productId);
+        const existing = cart.find(item => item.id === productId);
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({ ...product, quantity: 1 });
         }
+        saveCart();
+        
+        showNotification('✅ Товар добавлен в корзину!');
+    }
 
         function removeFromCart(productId) {
             cart = cart.filter(item => item.id !== productId);
@@ -474,7 +470,6 @@ const products = [
                     <p class="product-desc">${p.desc}</p>
                     <div class="product-price">
                         ${p.price} сом
-                        <span class="old-price">${p.oldPrice} сом</span>
                     </div>
                     <button class="btn-add" onclick="event.stopPropagation(); addToCart(${p.id})">🛒 Хочу купить</button>
                 </div>
@@ -487,12 +482,9 @@ const products = [
     
     let imagesHtml = `<img src="${product.image}" id="mainProductImage" style="width:100%; border-radius:20px; margin-bottom:10px;">`;
     
-    // Если есть дополнительные фото, добавляем превью
     if (product.images && product.images.length > 0) {
         imagesHtml += '<div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">';
-        // Добавляем главное фото как первое превью
         imagesHtml += `<img src="${product.image}" onclick="document.getElementById('mainProductImage').src='${product.image}'" style="width:70px; height:70px; object-fit:cover; border-radius:10px; cursor:pointer; border:2px solid transparent;" onmouseover="this.style.borderColor='#f97316'" onmouseout="this.style.borderColor='transparent'">`;
-        // Добавляем остальные фото
         product.images.forEach(img => {
             imagesHtml += `<img src="${img}" onclick="document.getElementById('mainProductImage').src='${img}'" style="width:70px; height:70px; object-fit:cover; border-radius:10px; cursor:pointer; border:2px solid transparent;" onmouseover="this.style.borderColor='#f97316'" onmouseout="this.style.borderColor='transparent'">`;
         });
@@ -507,7 +499,6 @@ const products = [
             <p><strong>Характеристики:</strong> ${product.specs}</p>
             <div style="display:flex; gap:10px;">
                 <span style="font-size:32px; font-weight:800;">${product.price} сом</span>
-                <span style="font-size:20px; color:gray; text-decoration:line-through;">${product.oldPrice} сом</span>
             </div>
             <button class="btn-add" onclick="addToCart(${product.id}); document.getElementById('productModal').classList.remove('active');">🛒 Добавить в корзину</button>
         </div>
@@ -598,5 +589,79 @@ const products = [
             }
         });
     </script>
+    <script>
+    //  ТЁМНАЯ ТЕМА //
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggle.textContent = '☀️';
+    }
+    
+    themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-theme');
+        
+        if (document.body.classList.contains('dark-theme')) {
+            localStorage.setItem('theme', 'dark');
+            themeToggle.textContent = '☀️';
+        } else {
+            localStorage.setItem('theme', 'light');
+            themeToggle.textContent = '🌙';
+        }
+    });
+
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+
+    const deliveryLink = document.querySelector('a[href="#delivery"]');
+    if (deliveryLink) {
+        deliveryLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (cart.length === 0) {
+                showNotification('❌ У вас нет товаров в корзине. Сначала выберите очки!');
+            } else {
+                const checkoutSection = document.getElementById('checkoutModal');
+                if (checkoutSection) {
+                    document.getElementById('cartModal')?.classList.remove('active');
+                    document.getElementById('checkoutModal')?.classList.add('active');
+                    initMap();
+                    
+                    setTimeout(() => {
+                        document.querySelector('#checkoutModal .modal-content').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }, 300);
+                }
+            }
+        });
+    }
+
+function showNotification(message) {
+    const oldNotification = document.querySelector('.notification');
+    if (oldNotification) {
+        oldNotification.remove();
+    }
+    
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+</script>
 </body>
 </html>
