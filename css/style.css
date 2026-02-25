@@ -8,13 +8,263 @@
             --white: #ffffff;
             --gray-light: #f5f5f7;
             --gray: #6b7280;
-            --accent: #f97316; /* оранжевый */
+            --accent: #f97316; 
             --accent-hover: #ea580c;
             --shadow: 0 20px 35px -10px rgba(0,0,0,0.05);
             --radius: 24px;
             --radius-sm: 16px;
             --font: 'Inter', sans-serif;
         }
+
+        /* ТЁМНАЯ ТЕМА */
+        body.dark-theme .hero {
+            background: linear-gradient(to bottom, #1a1a1a, #0a0a0a);
+        }
+
+        body.dark-theme .hero-content h1 {
+            color: #ffffff;
+        }
+
+        body.dark-theme .hero-content p {
+            color: #a0a0a0;
+        }
+
+        body.dark-theme .btn-outline {
+            border-color: #ffffff;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        body.dark-theme .btn-outline:hover {
+            background: #ffffff;
+            color: #0a0a0a;
+        }
+
+        body.dark-theme .features {
+            background: #1a1a1a;
+        }
+
+        body.dark-theme .feature-desc {
+            color: #a0a0a0;
+        }
+
+        body.dark-theme .catalog-grid .product-card {
+            background: #1a1a1a;
+            border-color: #2a2a2a;
+        }
+
+        body.dark-theme .catalog-grid .product-card:hover {
+            background: #2a2a2a;
+        }
+
+        body.dark-theme .product-desc {
+            color: #a0a0a0;
+        }
+
+        body.dark-theme .old-price {
+            color: #666;
+        }
+
+        body.dark-theme .timer {
+            background: var(--accent);
+            color: white;
+        }
+
+        body.dark-theme .price-compare {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+        }
+
+        body.dark-theme .compare-old {
+            color: #666;
+        }
+
+        body.dark-theme .review-card {
+            background: #1a1a1a;
+            border-color: #2a2a2a;
+        }
+
+        body.dark-theme .review-text {
+            color: #e0e0e0;
+        }
+
+        body.dark-theme .review-author {
+            color: #ffffff;
+        }
+
+        body.dark-theme .footer {
+            background: #000000;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        body.dark-theme .footer-links a {
+            color: #a0a0a0;
+        }
+
+        body.dark-theme .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        body.dark-theme .btn-primary {
+            background-color: var(--accent);
+            color: #0a0a0a;
+        }
+
+        body.dark-theme .btn-primary:hover {
+            background-color: #ffffff;
+            color: #0a0a0a;
+        }
+
+        body.dark-theme .btn-outline {
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        body.dark-theme .btn-outline:hover {
+            background: var(--accent);
+            color: #0a0a0a;
+        }
+
+        body.dark-theme .btn-add {
+            background: var(--accent);
+            color: #0a0a0a;
+        }
+
+        body.dark-theme .btn-add:hover {
+            background: #ffffff;
+            color: #0a0a0a;
+        }
+
+        body.dark-theme .theme-toggle {
+            color: #ffffff;
+        }
+
+        body.dark-theme .theme-toggle:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        body.dark-theme .modal-content .btn-primary {
+            background: var(--accent);
+            color: #0a0a0a;
+        }
+
+        body.dark-theme .modal-content .btn-primary:hover {
+            background: #ffffff;
+        }
+
+        body.dark-theme #contactModal .modal-content a[href*="tel"] {
+            background: #2a2a2a !important;
+            color: white !important;
+        }
+
+        body.dark-theme #contactModal .modal-content a[href*="tel"]:hover {
+            background: #3a3a3a !important;
+        }
+
+        body.dark-theme #contactModal .modal-content button#whatsappOrderBtn {
+            background: #25D366 !important;
+            color: white !important;
+        }
+
+        body.dark-theme #contactModal .modal-content button#whatsappOrderBtn:hover {
+            background: #20b858 !important;
+        }
+
+        body.dark-theme .close-modal {
+            color: #ffffff;
+        }
+
+        body.dark-theme .close-modal:hover {
+            color: var(--accent);
+        }
+
+        body.dark-theme {
+            --black: #ffffff;
+            --white: #0a0a0a;
+            --gray-light: #1a1a1a;
+            --gray: #a0a0a0;
+            --accent: #f97316;
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+
+        body.dark-theme .header {
+            background-color: rgba(10,10,10,0.85);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        body.dark-theme .product-card {
+            background: #1a1a1a;
+            border-color: #2a2a2a;
+        }
+
+        body.dark-theme .modal-content {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        body.dark-theme .footer {
+            background: #000000;
+        }
+
+        body.dark-theme .price-compare {
+            background: #1a1a1a;
+        }
+
+        body.dark-theme .review-card {
+            background: #1a1a1a;
+            border-color: #2a2a2a;
+        }
+
+        body.dark-theme .review-text {
+            color: #e0e0e0;
+        }
+
+        /*  УВЕДОМЛЕНИЕ  */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 9999;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(128,128,128,0.1);
+        }
+
         body {
             font-family: var(--font);
             background-color: var(--white);
