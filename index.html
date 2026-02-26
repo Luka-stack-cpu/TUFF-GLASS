@@ -392,7 +392,7 @@ const products = [
         image: 'https://i.ibb.co/gMKwKB9p/C1-5d8d0a10-687f-407a-a05f-b89498289d84.jpg',
         badge: 'Хит',
         images: [
-            'https://i.ibb.co/zWnxnkjv/19-5e200cd7-d8c8-4620-930f-265b2a461b4d.jpg' // задний вид
+            'https://i.ibb.co/zWnxnkjv/19-5e200cd7-d8c8-4620-930f-265b2a461b4d.jpg' 
         ],
         specs: 'Классическая форма, два ракурса в одной модели.'
     },
@@ -404,7 +404,7 @@ const products = [
         image: 'https://i.ibb.co/1GfKZsSw/2.jpg',
         badge: 'Новинка',
         images: [
-            'https://i.ibb.co/9mVNyTxf/20.jpg' // второй вид
+            'https://i.ibb.co/9mVNyTxf/20.jpg' 
         ],
         specs: 'Два варианта дизайна: перед/зад. Поляризация, UV400.'
     }
@@ -424,21 +424,26 @@ const products = [
         }
 
         function addToCart(productId) {
-        const card = event.target.closest('.product-card');
-        card.classList.add('add-flash');
-        setTimeout(() => card.classList.remove('add-flash'), 300);
-        const product = products.find(p => p.id === productId);
-        const existing = cart.find(item => item.id === productId);
-        if (existing) {
-            existing.quantity += 1;
-        } else {
-            cart.push({ ...product, quantity: 1 });
-        }
-        saveCart();
-        
-        showNotification('✅ Товар добавлен в корзину!');
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    const existing = cart.find(item => item.id === productId);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({ 
+            id: product.id,
+            name: product.name,
+            desc: product.desc,
+            price: product.price,
+            image: product.image,
+            quantity: 1 
+        });
     }
-
+    saveCart();
+    
+    showNotification('✅ Товар добавлен в корзину!');
+}
         function clearCart() {
             if (cart.length === 0) {
                 showNotification('❌ Корзина уже пуста');
@@ -469,7 +474,6 @@ const products = [
     let html = '';
     let total = 0;
     
-    // Кнопка "Очистить всё" в начале
     html += `
         <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
             <button onclick="clearCart()" style="background: #fee2e2; color: #dc2626; border: none; padding: 8px 16px; border-radius: 40px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s;">
@@ -1041,6 +1045,16 @@ function createAdminPanel() {
                 </div>
                 
                 <div id="adminContent" style="display: none;">
+                    <div style="display: flex; gap: 15px; margin-bottom: 25px; justify-content: flex-end;">
+    <button onclick="exportReviews()" style="background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+        💾 Сохранить отзывы в файл
+    </button>
+    
+    <label for="importReviews" style="background: var(--black); color: white; border: none; padding: 10px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+        📂 Загрузить отзывы из файла
+        <input type="file" id="importReviews" accept=".json" style="display: none;" onchange="importReviews(event)">
+    </label>
+</div>
                     <div class="admin-stats">
                         <div class="admin-stat-item">
                             <div class="admin-stat-value" id="totalReviews">0</div>
@@ -1164,6 +1178,15 @@ function createAdminPanel() {
                 border-color: #3a3a3a;
                 color: white;
             }
+            
+            body.dark-theme label[for="importReviews"] {
+            background: #2a2a2a !important;
+            color: white !important;
+            }
+
+            body.dark-theme label[for="importReviews"]:hover {
+                background: #3a3a3a !important;
+            }
         `;
         document.head.appendChild(style);
     }
@@ -1179,6 +1202,62 @@ function deleteReview(productId, reviewId) {
             renderAdminPanel();
         }
     }
+}
+
+
+function exportReviews() {
+    const dataStr = JSON.stringify(productReviews, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    
+    const exportFileDefaultName = `reviews_backup_${new Date().toISOString().slice(0,10)}.json`;
+    
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+    
+    showNotification('✅ Отзывы сохранены в файл');
+}
+
+function importReviews(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const importedReviews = JSON.parse(e.target.result);
+            
+            if (typeof importedReviews === 'object' && importedReviews !== null) {
+                Object.keys(importedReviews).forEach(productId => {
+                    if (!productReviews[productId]) {
+                        productReviews[productId] = importedReviews[productId];
+                    } else {
+                        const existingIds = new Set(productReviews[productId].reviews.map(r => r.id));
+                        const newReviews = importedReviews[productId].reviews.filter(r => !existingIds.has(r.id));
+                        productReviews[productId].reviews.push(...newReviews);
+                        
+                        updateAverageRating(parseInt(productId));
+                    }
+                });
+                
+                saveReviews();
+                showNotification('✅ Отзывы успешно загружены!');
+                
+                if (document.getElementById('adminContent').style.display === 'block') {
+                    renderAdminPanel();
+                }
+            } else {
+                showNotification('❌ Неверный формат файла');
+            }
+        } catch (error) {
+            showNotification('❌ Ошибка при загрузке файла');
+            console.error(error);
+        }
+    };
+    reader.readAsText(file);
+    
+    event.target.value = '';
 }
 
 function renderAdminPanel() {
