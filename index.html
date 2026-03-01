@@ -518,17 +518,17 @@
     }
 
     
-    async function loadReviews(productId) {
-        try {
-            const snapshot = await reviewsCollection.where('productId', '==', productId).orderBy('date', 'desc').get();
-            const reviews = [];
-            snapshot.forEach(doc => reviews.push({ id: doc.id, ...doc.data() }));
-            return reviews;
-        } catch (error) {
-            console.error('Ошибка загрузки отзывов:', error);
-            return [];
-        }
+ async function loadReviews(productId) {
+    try {
+        const snapshot = await reviewsCollection.where('productId', '==', productId).get();
+        const reviews = [];
+        snapshot.forEach(doc => reviews.push({ id: doc.id, ...doc.data() }));
+        return reviews; // без сортировки
+    } catch (error) {
+        console.error('Ошибка загрузки отзывов:', error);
+        return [];
     }
+}
 
     function hasUserPurchased(productId) {
         return cart.some(item => item.id === productId);
