@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
     <title>TUFFE GLASSES — стильные очки за 1500 сом</title>
-    <link rel="icon" href="logo.png" type="icon">
+    <link rel="icon" href="img/logo.png" type="icon">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_ключ&lang=ru_RU" type="text/javascript"></script>
@@ -224,12 +224,20 @@
             <p style="font-size: 14px; color: #999;">Мы свяжемся с вами в ближайшее время</p>
         </div>
     </div>
+    <div id="scrollTopBtn" style="position: fixed; bottom: 30px; right: 30px; background: var(--accent); color: white; width: 50px; height: 50px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1000;" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</div>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script>
-
+        window.addEventListener('scroll', function() {
+    const btn = document.getElementById('scrollTopBtn');
+    if (window.scrollY > 300) {
+        btn.style.display = 'flex';
+    } else {
+        btn.style.display = 'none';
+    }
+});
     const firebaseConfig = {
         apiKey: "AIzaSyDrihZ2teDrAV2OLI8tyMjtxRZRwqHH1Rs",
         authDomain: "tuffe-glasses.firebaseapp.com",
@@ -355,11 +363,18 @@
                 desc: product.desc,
                 price: product.price,
                 image: product.image,
-                quantity: 1 
+                quantity: 1,
+                selected: true
             });
         }
         saveCart();
         showNotification('✅ Товар добавлен в корзину!');
+
+        const card = document.querySelector(`.product-card[onclick*="openProductModal(${productId})"]`);
+if (card) {
+    card.classList.add('add-flash');
+    setTimeout(() => card.classList.remove('add-flash'), 300);
+}
     }
 
     function clearCart() {
@@ -377,46 +392,142 @@
         cart = cart.filter(item => item.id !== productId);
         saveCart();
     }
-
-    function renderCartItems() {
-        const container = document.getElementById('cartItemsContainer');
-        if (!container) return;
-        
-        if (cart.length === 0) {
-            container.innerHTML = '<p style="text-align:center; padding:30px;">Корзина пуста</p>';
-            document.getElementById('cartTotal').innerHTML = '';
-            return;
-        }
-        
-        let html = '';
-        let total = 0;
-        
-        html += `
-            <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
-                <button onclick="clearCart()" style="background: #fee2e2; color: #dc2626; border: none; padding: 8px 16px; border-radius: 40px; font-weight: 600; cursor: pointer;">
-                    🗑️ Очистить всё
-                </button>
+    
+ function renderCartItems() {
+    const container = document.getElementById('cartItemsContainer');
+    if (!container) return;
+    
+    if (cart.length === 0) {
+        container.innerHTML = '<p style="text-align:center; padding:30px;">Корзина пуста</p>';
+        document.getElementById('cartTotal').innerHTML = '';
+        return;
+    }
+    
+    const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const discountThreshold = 3000;
+    let discount = 0;
+    let finalTotal = cartTotal;
+    
+    if (cartTotal >= discountThreshold) {
+        discount = cartTotal * 0.1; 
+        finalTotal = cartTotal - discount;
+    }
+    
+    let discountHtml = '';
+    if (cartTotal < discountThreshold) {
+        const remaining = discountThreshold - cartTotal;
+        const percent = (cartTotal / discountThreshold) * 100;
+        discountHtml = `
+            <div style="background: #f0f0f0; border-radius: 30px; padding: 15px; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span>Добавьте ещё <strong>${remaining} сом</strong> для скидки 10%</span>
+                    <span>${Math.round(percent)}%</span>
+                </div>
+                <div style="height: 10px; background: #ddd; border-radius: 10px; overflow: hidden;">
+                    <div style="width: ${percent}%; height: 100%; background: var(--accent);"></div>
+                </div>
             </div>
         `;
-        
-        cart.forEach(item => {
-            total += item.price * item.quantity;
-            html += `
-                <div class="cart-item">
-                    <img src="${item.image}" class="cart-item-img" alt="${item.name}">
-                    <div class="cart-item-info">
-                        <div class="cart-item-title">${item.name}</div>
-                        <div style="font-size:14px; color:var(--gray);">${item.desc}</div>
-                        <div class="cart-item-price">${item.price} сом x ${item.quantity}</div>
-                    </div>
-                    <div class="cart-item-remove" onclick="removeFromCart(${item.id})">Удалить</div>
-                </div>
-            `;
-        });
-        
-        container.innerHTML = html;
-        document.getElementById('cartTotal').innerHTML = `Итого: ${total} сом`;
+    } else {
+        discountHtml = `
+            <div style="background: #e6f7e6; border-radius: 30px; padding: 15px; margin-bottom: 20px; color: #2e7d32;">
+                🎉 Скидка 10% активирована! Сумма с учётом скидки: <strong>${finalTotal} сом</strong>
+            </div>
+        `;
     }
+    
+    const allSelected = cart.every(item => item.selected);
+    
+    let html = '';
+    
+    html += `
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; gap: 10px;">
+                <button onclick="toggleSelectAll(true)" style="background: #e0e0e0; border: none; padding: 8px 16px; border-radius: 40px; cursor: pointer;">✅ Выбрать всё</button>
+                <button onclick="toggleSelectAll(false)" style="background: #e0e0e0; border: none; padding: 8px 16px; border-radius: 40px; cursor: pointer;">☑️ Снять всё</button>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="removeSelected()" style="background: #fee2e2; color: #dc2626; border: none; padding: 8px 16px; border-radius: 40px; font-weight: 600; cursor: pointer;">🗑️ Удалить выбранное</button>
+                <button onclick="checkoutSelected()" style="background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 40px; font-weight: 600; cursor: pointer;">🛒 Купить выбранное</button>
+            </div>
+        </div>
+    `;
+    
+    html += discountHtml;
+    
+    cart.forEach(item => {
+        html += `
+            <div class="cart-item" data-id="${item.id}">
+                <input type="checkbox" class="item-checkbox" data-id="${item.id}" ${item.selected ? 'checked' : ''} onchange="toggleItemSelection(${item.id}, this.checked)">
+                <img src="${item.image}" class="cart-item-img" alt="${item.name}">
+                <div class="cart-item-info">
+                    <div class="cart-item-title">${item.name}</div>
+                    <div style="font-size:14px; color:var(--gray);">${item.desc}</div>
+                    <div class="cart-item-price">${item.price} сом x ${item.quantity}</div>
+                </div>
+                <div class="cart-item-remove" onclick="removeFromCart(${item.id})">Удалить</div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+    
+    const selectedTotal = cart.filter(i => i.selected).reduce((sum, i) => sum + i.price * i.quantity, 0);
+    let selectedDiscount = 0;
+    if (selectedTotal >= discountThreshold) {
+        selectedDiscount = selectedTotal * 0.1;
+    }
+    
+    document.getElementById('cartTotal').innerHTML = `
+        <div style="text-align: right;">
+            <div>Общая сумма: <strong>${cartTotal} сом</strong></div>
+            ${cartTotal >= discountThreshold ? `<div style="color: #2e7d32;">Скидка 10%: -${discount} сом</div>` : ''}
+            <div style="font-size: 24px; margin-top: 10px;">Выбрано: <strong>${selectedTotal - (selectedTotal >= discountThreshold ? selectedTotal * 0.1 : 0)} сом</strong></div>
+        </div>
+    `;
+} 
+    
+function toggleSelectAll(select) {
+    cart.forEach(item => item.selected = select);
+    saveCart();
+    renderCartItems();
+}
+
+function toggleItemSelection(id, checked) {
+    const item = cart.find(i => i.id === id);
+    if (item) item.selected = checked;
+    saveCart();
+    renderCartItems();
+}
+
+function removeSelected() {
+    cart = cart.filter(item => !item.selected);
+    saveCart();
+    renderCartItems();
+    showNotification('🗑️ Выбранные товары удалены');
+}
+
+function checkoutSelected() {
+    const selected = cart.filter(item => item.selected);
+    if (selected.length === 0) {
+        showNotification('❌ Не выбрано ни одного товара');
+        return;
+    }
+
+    openCheckoutForSelected();
+}
+
+function openCheckoutForSelected() {
+    const selected = cart.filter(item => item.selected);
+    if (selected.length === 0) {
+        showNotification('❌ Не выбрано ни одного товара');
+        return;
+    }
+    document.getElementById('cartModal').classList.remove('active');
+    document.getElementById('checkoutModal').classList.add('active');
+    initMap();
+    window.selectedForCheckout = selected;
+}
 
     // КАТАЛОГ //
     function renderCatalog() {
@@ -560,29 +671,105 @@
         }
     }
 
-    async function likeReview(reviewId, currentLikes) {
+let likedReviews = JSON.parse(localStorage.getItem('likedReviews')) || {};
+let dislikedReviews = JSON.parse(localStorage.getItem('dislikedReviews')) || {};
+
+function saveReactions() {
+    localStorage.setItem('likedReviews', JSON.stringify(likedReviews));
+    localStorage.setItem('dislikedReviews', JSON.stringify(dislikedReviews));
+}
+
+async function likeReview(reviewId, currentLikes, currentDislikes) {
+    if (likedReviews[reviewId]) {
+        try {
+            await reviewsCollection.doc(reviewId).update({
+                likes: currentLikes - 1
+            });
+            delete likedReviews[reviewId];
+            saveReactions();
+            showNotification('👍 Лайк убран');
+        } catch (error) {
+            console.error('Ошибка при отмене лайка:', error);
+            showNotification('❌ Ошибка');
+        }
+    }
+    else if (dislikedReviews[reviewId]) {
+        try {
+            await reviewsCollection.doc(reviewId).update({
+                dislikes: currentDislikes - 1,
+                likes: currentLikes + 1
+            });
+            delete dislikedReviews[reviewId];
+            likedReviews[reviewId] = true;
+            saveReactions();
+            showNotification('👍 Лайк поставлен');
+        } catch (error) {
+            console.error('Ошибка при переключении на лайк:', error);
+            showNotification('❌ Ошибка');
+        }
+    }
+    else {
         try {
             await reviewsCollection.doc(reviewId).update({
                 likes: currentLikes + 1
             });
-            const productId = getCurrentProductId();
-            if (productId) openProductModal(productId);
+            likedReviews[reviewId] = true;
+            saveReactions();
+            showNotification('👍 Лайк поставлен');
         } catch (error) {
-            console.error('Ошибка лайка:', error);
+            console.error('Ошибка при лайке:', error);
+            showNotification('❌ Ошибка');
         }
     }
+    const productId = getCurrentProductId();
+    if (productId) openProductModal(productId);
+}
 
-    async function dislikeReview(reviewId, currentDislikes) {
+async function dislikeReview(reviewId, currentLikes, currentDislikes) {
+    if (dislikedReviews[reviewId]) {
+        try {
+            await reviewsCollection.doc(reviewId).update({
+                dislikes: currentDislikes - 1
+            });
+            delete dislikedReviews[reviewId];
+            saveReactions();
+            showNotification('👎 Дизлайк убран');
+        } catch (error) {
+            console.error('Ошибка при отмене дизлайка:', error);
+            showNotification('❌ Ошибка');
+        }
+    }
+    else if (likedReviews[reviewId]) {
+        try {
+            await reviewsCollection.doc(reviewId).update({
+                likes: currentLikes - 1,
+                dislikes: currentDislikes + 1
+            });
+            delete likedReviews[reviewId];
+            dislikedReviews[reviewId] = true;
+            saveReactions();
+            showNotification('👎 Дизлайк поставлен');
+        } catch (error) {
+            console.error('Ошибка при переключении на дизлайк:', error);
+            showNotification('❌ Ошибка');
+        }
+    }
+    else {
         try {
             await reviewsCollection.doc(reviewId).update({
                 dislikes: currentDislikes + 1
             });
-            const productId = getCurrentProductId();
-            if (productId) openProductModal(productId);
+            dislikedReviews[reviewId] = true;
+            saveReactions();
+            showNotification('👎 Дизлайк поставлен');
         } catch (error) {
-            console.error('Ошибка дизлайка:', error);
+            console.error('Ошибка при дизлайке:', error);
+            showNotification('❌ Ошибка');
         }
     }
+    const productId = getCurrentProductId();
+    if (productId) openProductModal(productId);
+}
 
     function renderStars(rating, interactive = false, productId = null, containerId = null) {
         let html = '<div class="stars-container">';
